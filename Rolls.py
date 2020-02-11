@@ -1,16 +1,17 @@
 import random
-roll = [0,0,0,0,0,0]
+import array
+roll = array.array('i', [0])
 n = int(input("Enter number of Dice: "))
+t = int(input("Enter number of Sides: "))
 x = 0
+for i in range(1,t):
+	roll.append(0)
 def Dicerolls(n):
 	for i in range(0,n):
-		x = random.randrange(1,7,1)
+		x = random.randrange(1,t+1,1)
 		roll[x-1] = roll[x-1]+1
 
 Dicerolls(n)
-print("1: " + str(roll[0]) + "/" + str(n) + " = " + str((roll[0]/n)*100) + "%")
-print("2: " + str(roll[1]) + "/" + str(n) + " = " + str((roll[1]/n)*100) + "%")
-print("3: " + str(roll[2]) + "/" + str(n) + " = " + str((roll[2]/n)*100) + "%")
-print("4: " + str(roll[3]) + "/" + str(n) + " = " + str((roll[3]/n)*100) + "%")
-print("5: " + str(roll[4]) + "/" + str(n) + " = " + str((roll[4]/n)*100) + "%")
-print("6: " + str(roll[5]) + "/" + str(n) + " = " + str((roll[5]/n)*100) + "%")
+for i in range(0,t):
+	print(str(i+1) + ": " + str(roll[i]) + "/" + str(n) + " = " + str((roll[i]/n)*100) + "%")
+
