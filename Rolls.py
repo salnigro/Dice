@@ -9,6 +9,8 @@ for i in range(1,t):
 def Dicerolls(n):
 	for i in range(0,n):
 		x = random.randrange(1,t+1,1)
+		if random.randrange(1,11,1) <= 2:
+			x = 1
 		roll[x-1] = roll[x-1]+1
 
 Dicerolls(n)
