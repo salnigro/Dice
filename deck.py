@@ -39,14 +39,10 @@ def deal():
 
 
 def selectSort(arr):
-    
     for i in range(len(arr)):
-        
         min_idx = i
-        
         for j in range(i+1, len(arr)):
             s = arr[min_idx][0:len(arr[min_idx])-1]
-
             t = arr[j]
             t = t[0:len(t)-1]
             if(t == "A"):
@@ -66,12 +62,33 @@ def selectSort(arr):
             if(s == "K"):
                 s="13"
             if int(s) > int(t):
-                
-                min_idx = j 
-                
-        arr[i], arr[min_idx] = arr[min_idx], arr[i] 
-
-
+                min_idx = j   
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+    for i in range(0,len(arr),4):
+        min_idx = i
+        for j in range(i,i+4):
+            s = arr[min_idx][len(arr[min_idx])-1:len(arr[min_idx])]
+            t = arr[j]
+            t = t[len(t)-1:len(t)]
+            if(t == "♦"):
+                t="4"
+            if(t == "♣"):
+                t="3"
+            if(t == "♥"):
+                t="2"
+            if(t == "♠"):
+                t="1"
+            if(s == "♦"):
+                s="4"
+            if(s == "♣"):
+                s="3"
+            if(s == "♥"):
+                s="2"
+            if(s == "♠"):
+                s="1"
+            if int(s) > int(t):       
+                min_idx = j       
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
 
 
 
@@ -93,6 +110,10 @@ def proper(s):
         s = s[0:2]
     return int(s)
 
+
+
+
+
 shuffle(deck)
 
 selectSort(deck)
@@ -100,6 +121,7 @@ selectSort(deck)
 print(deck)
 
 
+#print(sorted(deck,key=proper))
 
 
 
