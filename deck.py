@@ -1,130 +1,37 @@
-from random import randint, random
-from math import floor
-import sys 
-deck = []
-suits = ["♦","♣","♥","♠"]
-for i in range(4):
-    for j in range(1,14):
-        value = str(j)
-        if( j == 1):
-            value =  "A"
-        if(  j == 11):
-            value =  "J"
-        if(  j == 12):
-            value =  "Q"
-        if( j == 13):
-            value =  "K"
-        deck.append(f"{value}{suits[i]}")
-            
+import random
 
+from Card import Card
 
-def shuffle(arr):
-    n = len(arr)
-    while n > 1:
-        i = int(floor(random() * n))
-        n -= 1
-        arr[i], arr[n] = arr[n], arr[i]
-    return arr
+class Deck(object):
+    
+    def __init__(self):
+        self.create()
 
+    def __str__(self):
+        return '[' + ', '.join(str(card) for card in self.cards) + ']',
+    
+    def create(self):
+        self.cards = []
+        for i in range(4):
+            for j in range(0,13):
+                self.cards.append(Card(i, j))
 
-def deal():
-    d = []
-    s = ["♦","♣","♥","♠"]
-    f = {1:"A", 11:"J",12:"Q",13:"K"}
-    for i in range(4):
-        for j in range(1,14):
-            d.append(f"{f[j] if j in f else j}{s[i]}")
-    return d
+    def sort(self):
+        n = len(self.cards)
+        for i in range(n): 
+            pos = i 
+            for j in range(i+1, n):
+                a = self.cards[pos]
+                b = self.cards[j]
+                if (a.suitIndex > b.suitIndex or (a.suitIndex == b.suitIndex and a.faceIndex > b.faceIndex)):
+                    pos = j
+            self.cards[i], self.cards[pos] = self.cards[pos], self.cards[i] 
+        
+    def shuffle(self):
+        n = len(self.cards)
+        for i in range(n-1,0,-1): 
+            j = random.randint(0,i+1) 
+            self.cards[i],self.cards[j] = self.cards[j],self.cards[i]
 
-
-
-def selectSort(arr):
-    for i in range(len(arr)):
-        min_idx = i
-        for j in range(i+1, len(arr)):
-            s = arr[min_idx][0:len(arr[min_idx])-1]
-            t = arr[j]
-            t = t[0:len(t)-1]
-            if(t == "A"):
-                t="1"
-            if(t == "J"):
-                t="11"
-            if(t == "Q"):
-                t="12"
-            if(t == "K"):
-                t="13"
-            if(s == "A"):
-                s="1"
-            if(s == "J"):
-                s="11"
-            if(s == "Q"):
-                s="12"
-            if(s == "K"):
-                s="13"
-            if int(s) > int(t):
-                min_idx = j   
-        arr[i], arr[min_idx] = arr[min_idx], arr[i]
-    for i in range(0,len(arr),4):
-        min_idx = i
-        for j in range(i,i+4):
-            s = arr[min_idx][len(arr[min_idx])-1:len(arr[min_idx])]
-            t = arr[j]
-            t = t[len(t)-1:len(t)]
-            if(t == "♦"):
-                t="4"
-            if(t == "♣"):
-                t="3"
-            if(t == "♥"):
-                t="2"
-            if(t == "♠"):
-                t="1"
-            if(s == "♦"):
-                s="4"
-            if(s == "♣"):
-                s="3"
-            if(s == "♥"):
-                s="2"
-            if(s == "♠"):
-                s="1"
-            if int(s) > int(t):       
-                min_idx = j       
-        arr[i], arr[min_idx] = arr[min_idx], arr[i]
-
-
-
-
-
-
-def proper(s):
-    if(len(s) == 2):
-        s = s[0:1]
-        if(s == "A"):
-            s="1"
-        if(s == "J"):
-            s="11"
-        if(s == "Q"):
-            s="12"
-        if(s == "K"):
-            s="13"
-    if(len(s) == 3):
-        s = s[0:2]
-    return int(s)
-
-
-
-
-
-shuffle(deck)
-
-selectSort(deck)
-
-print(deck)
-
-
-#print(sorted(deck,key=proper))
-
-
-
-
-
-
+    def index(self,i):
+        return self.cards[i]

@@ -17,3 +17,4 @@ Dicerolls(n)
 for i in range(0,t):
 	print(str(i+1) + ": " + str(roll[i]) + "/" + str(n) + " = " + str((roll[i]/n)*100) + "%")
 
+# the algorithm checks again for a 20% chance of turning the roll into a 1
