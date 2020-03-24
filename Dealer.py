@@ -52,7 +52,7 @@ class Dealer(object):
                 if(self.players[i].cards[j].faceIndex > 10):
                     t = self.players[i].cards[j].faceIndex - 10
                 if(self.players[i].cards[j].faceIndex == 0):
-                    st = input("use as 11 or 1"):
+                    st = input("use as 11 or 1")
                         
                 t += self.players[i].cards[j].faceIndex + 1
                 
